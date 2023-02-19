@@ -209,7 +209,7 @@ while True:
             player_rect.bottom = 730 
         screen.blit(player_surf, player_rect)
 
-        #PLAYER ANIMATION
+        #ALL ANIMATION
         player_animation()
         snail_animation()
         fly_animation()
