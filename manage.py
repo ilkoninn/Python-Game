@@ -10,7 +10,7 @@ def displayScore():
     score_surf = test_font.render('Score: ' + str(current_time), False, (64,64,64))
     default_image_size5 = (200, 50)
     score_surf = pygame.transform.scale(score_surf, default_image_size5)
-    score_rect = score_surf.get_rect(topleft = (0, 100))
+    score_rect = score_surf.get_rect(topleft = (0, 200))
     screen.blit(score_surf, score_rect)
 
     return current_time
@@ -64,10 +64,23 @@ def fly_animation():
         fly_index = 0
     fly_surf = fly_frames[int(fly_index)]
 
+def displayMaxScore():
+    global game_data
+
+    game_data.append(score)
+
+    max_score_surf = test_font.render(f'Max Score: {max(game_data)}', False, (64,64,64))
+    default_image_size5 = (280, 50)
+    max_score_surf = pygame.transform.scale(max_score_surf, default_image_size5)
+    max_score_rect = max_score_surf.get_rect(topleft = (0, 100))
+    screen.blit(max_score_surf, max_score_rect)
+
+
+
 pygame.init()
 
 screen = pygame.display.set_mode((1280,960))
-pygame.display.set_caption('MyGame')
+pygame.display.set_caption('Fuad Müəllim')
 clock = pygame.time.Clock()
 
 test_font = pygame.font.Font('Font/prstart.ttf', 50)
@@ -85,12 +98,15 @@ ground_surface = pygame.image.load('Graphics/fotos/ground.png').convert()
 default_image_size2 = (1280, 240)
 ground_surface = pygame.transform.scale(ground_surface, default_image_size2)
 
-text_surface = test_font.render("PIXEL RUNNER", False, 'Black')
+text_surface = test_font.render("FUAD GAME", False, 'Black')
 
 counter = 0
 
 jump_sound = pygame.mixer.Sound('Audio/audio_jump.mp3')
 game_sound = pygame.mixer.Sound('Audio/game_sound.mp3')
+
+game_data = []
+
 
 #OBSTACLES
 #SNAILS VARIABLES
@@ -166,6 +182,7 @@ obstacle_timer = pygame.USEREVENT + 1
 pygame.time.set_timer(obstacle_timer, 2000)
 
 while True:
+    #GAME MAIN CODES
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -200,7 +217,7 @@ while True:
         screen.blit(ground_surface, (0,720))
         screen.blit(text_surface, (360, 0))
         score = displayScore()
-
+        max_score = displayMaxScore()
 
         #PLAYER    
         player_gravity += 1
@@ -209,7 +226,7 @@ while True:
             player_rect.bottom = 730 
         screen.blit(player_surf, player_rect)
 
-        #ALL ANIMATION
+        #PLAYER ANIMATION
         player_animation()
         snail_animation()
         fly_animation()
