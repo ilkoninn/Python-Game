@@ -1,6 +1,3 @@
-# Group: KE022S1
-# Name and surname: Rajabov Ilkin
-# Teacher: Fuad Gurbanov
 # Project name: Pixel Runner
 #
 # In this project we will use a library called pygame.
