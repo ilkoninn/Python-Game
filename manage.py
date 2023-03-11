@@ -1,8 +1,40 @@
+# Group: KE022S1
+# Name and surname: Rajabov Ilkin
+# Teacher: Fuad Gurbanov
+# Project name: Pixel Runner
+#
+# In this project we will use a library called pygame.
+# This library allows us to write games using python.
+
+
 import pygame
 from sys import exit
 from random import randint
 
+
 #GAME FUNCTIONS
+# Game features will be used to build the dynamism and animation of our game.
+# The working principle of the game animation function is briefly, two image 
+# variables will be added to the array, and then we will create a small loop 
+# inside that array.
+#
+# For example,
+#
+# [photo1, photo2]
+# photo1 <---> photo2
+#
+# If we create a period in this array that will only have zero and one index, 
+# then the images will start moving and the animation will appear.
+#
+# At this time, those images will start to move at a certain speed, 
+# and at this time, the animation of the player given to us will appear.
+#
+# Added features for additional player movement in game mode. 
+# In fact, here too, using animation, the illusion of the eye 
+# has been done. In fact, our player does not move, just the 
+# two images for him cycle through the array, so it seems to
+# us that he is moving. :D
+
 def displayScore():
     current_time = int(pygame.time.get_ticks()/1000) - start_time
 
@@ -90,6 +122,7 @@ start_time = 0
 score = 0
 
 #DISPLAY
+# A section of code used to render an image to the screen
 sky_surface = pygame.image.load('Graphics/fotos/Sky.png').convert()
 default_image_size1 = (1280, 720)
 sky_surface = pygame.transform.scale(sky_surface, default_image_size1)
@@ -98,7 +131,7 @@ ground_surface = pygame.image.load('Graphics/fotos/ground.png').convert()
 default_image_size2 = (1280, 240)
 ground_surface = pygame.transform.scale(ground_surface, default_image_size2)
 
-text_surface = test_font.render("FUAD GAME", False, 'Black')
+text_surface = test_font.render("PIXEL GAME", False, 'Black')
 
 counter = 0
 
@@ -118,6 +151,7 @@ snail_frame_2 = pygame.image.load('Graphics/Mobs/snail/snail2.png').convert_alph
 default_image_size3 = (90, 50)
 snail_frame_2 = pygame.transform.scale(snail_frame_2, default_image_size3)
 
+#Our animation list for snail
 snail_frames = [snail_frame_1, snail_frame_2]
 snail_index = 0
 
@@ -132,6 +166,7 @@ fly_frame_2 = pygame.image.load('Graphics/Mobs/fly/Fly2.png').convert_alpha()
 default_image_size6 = (90, 50)
 fly_frame_2 = pygame.transform.scale(fly_frame_2, default_image_size6)
 
+#Our animation list for fly
 fly_frames = [fly_frame_1, fly_frame_2]
 fly_index = 0
 
@@ -151,6 +186,7 @@ default_image_size4 = (100, 140)
 player_walk_2 = pygame.transform.scale(player_walk_2, default_image_size4)
 player_rect = player_walk_2.get_rect(midbottom = (160,720))
 
+#Our animation list for player 
 player_walk = [player_walk_1, player_walk_2]
 
 player_index = 0
@@ -167,6 +203,8 @@ player_rect = player_surf.get_rect(midbottom = (160,720))
 player_gravity = 0
 
 #INTRO SCREEN
+#When we start our game, we have to create a menu display.
+#This screen is about that menu display.
 player_stand = pygame.image.load('Graphics/Player/Movements/player_stand.png').convert_alpha()
 player_stand_scaled = pygame.transform.scale(player_stand, (320, 400))
 player_stand_rect = player_stand_scaled.get_rect(center = (640,480))
@@ -178,6 +216,7 @@ game_message = test_font.render('Press space to run', False, (111, 196, 169))
 game_message_rect = game_message.get_rect(center = (640, 780))
 
 #TIMER
+#The emergence of creatures over a period of time. 
 obstacle_timer = pygame.USEREVENT + 1
 pygame.time.set_timer(obstacle_timer, 2000)
 
